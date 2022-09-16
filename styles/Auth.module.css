@@ -1,0 +1,53 @@
+.auth{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.form{
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.from_group{
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+
+.from_group label{
+  background-color: #fff;
+  height: 50px;
+  width: 55px;
+  border-radius: 50%;
+  color: var(--bs-info);
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.from_group input,
+.from_group button{
+  background-color: #fff;
+  color: var(--bs-info);
+  padding: 10px 20px;
+  border: transparent;
+  outline: none;
+  border-radius: 40px;
+  font-size: 18px;
+  width: 100%;
+  transition: .3s ease-in-out;
+}
+
+.from_group button{
+  font-weight: bold;
+  border: 1px solid;
+}
+.from_group button:hover{
+  background-color: var(--bs-info);
+  color: #fff;
+}
