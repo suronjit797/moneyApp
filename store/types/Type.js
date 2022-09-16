@@ -1,5 +1,6 @@
 const Types = {
-    REGISTER: 'REGISTER'
+    SET_USER: 'SET_USER',
+    ERROR: 'ERROR',
 }
 
 export default Types

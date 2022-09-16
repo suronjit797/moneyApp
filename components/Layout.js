@@ -1,7 +1,24 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 const Layout = ({ children, title }) => {
+    let isUser
+    const router = useRouter()
+    if (typeof window !== 'undefined') {
+        isUser = localStorage.getItem('token')
+    }
+
+    useEffect(() => {
+        if (!isUser) {
+            router.push('/login')
+        }
+    }, [isUser])
+
+
+
+
     return (
         <div className="bg-info text-white">
             <div className='layout container'>
@@ -18,7 +35,7 @@ const Layout = ({ children, title }) => {
                 </main>
 
                 <footer>
-                    
+
                 </footer>
             </div>
         </div>

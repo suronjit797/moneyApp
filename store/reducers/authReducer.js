@@ -6,15 +6,23 @@ const init = {
     error: {}
 }
 
-const counterReducer = (state = init, action) => {
+const authReducer = (state = init, action) => {
     switch (action.type) {
-        case Types.REGISTER:
+        case Types.SET_USER:
             return {
-                user: action.payload.user,
-                isAuthenticated: true,
-                error:{}
+                user: action.payload,
+                error: {},
+                isAuthenticated: Object.keys(action.payload).length !== 0,
+            }
+        case Types.ERROR:
+            return {
+                user: {},
+                error: action.payload,
+                isAuthenticated: Object.keys(action.payload).length === 0,
             }
         default:
             return state
     }
 }
+
+export default authReducer;

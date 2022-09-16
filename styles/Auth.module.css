@@ -12,9 +12,10 @@
 }
 
 .from_group{
-  display: flex;
+  display: grid;
+  grid-template-columns: 20% 80%;
   align-items: center;
-  margin: 20px 0;
+  margin-top: 20px;
   font-size: 20px;
 }
 
@@ -43,6 +44,10 @@
   transition: .3s ease-in-out;
 }
 
+.from_group_error input{
+  border: 2px solid #c0392b ;
+}
+
 .from_group button{
   font-weight: bold;
   border: 1px solid;
@@ -50,4 +55,11 @@
 .from_group button:hover{
   background-color: var(--bs-info);
   color: #fff;
+}
+
+.danger{
+  color: #c0392b;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 10px;
 }
