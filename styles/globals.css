@@ -34,3 +34,18 @@ a {
 footer{
   margin-top: auto;
 }
+
+
+.dropdown-toggle.nav-link{
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle.nav-link svg{
+  font-size: 25px;
+}
+
+.dropdown-menu[data-bs-popper]{
+  right: 0 ;
+  left: inherit !important;
+}

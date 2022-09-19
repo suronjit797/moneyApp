@@ -1,16 +1,34 @@
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import styles from '../styles/Home.module.css'
+import { home } from '../store/actions/authActions'
+import { connect } from 'react-redux'
+import { useEffect } from 'react'
 
-export default function Home() {
-  const router = useRouter()
-  const logout = () => {
-    localStorage.removeItem('token')
-    router.push('/login')
-  }
+function Home(props) {
+  // const router = useRouter()
+  // const logout = () => {
+  //   localStorage.removeItem('token')
+  //   router.push('/login')
+  // }
+
+  useEffect(()=>{
+    props.home()
+  },[])
+
   return (
     <Layout title='Home || Money Management App'>
-      <button onClick={logout}> logout </button>
+
+
+
+
+
+
+
+      {/* <button onClick={logout}> logout </button> */}
     </Layout>
   )
 }
+
+
+export default connect(null, {home})(Home)

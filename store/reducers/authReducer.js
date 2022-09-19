@@ -20,6 +20,12 @@ const authReducer = (state = init, action) => {
                 error: action.payload,
                 isAuthenticated: Object.keys(action.payload).length === 0,
             }
+        case Types.HOME_ERROR:
+            return {
+                user: {},
+                error: action.payload,
+                isAuthenticated: Object.keys(action.payload).length === 0,
+            }
         default:
             return state
     }
