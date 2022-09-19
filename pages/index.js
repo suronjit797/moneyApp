@@ -5,16 +5,16 @@ import { home } from '../store/actions/authActions'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 
-function Home(props) {
+function Home({ home }) {
   // const router = useRouter()
   // const logout = () => {
   //   localStorage.removeItem('token')
   //   router.push('/login')
   // }
 
-  useEffect(()=>{
-    props.home()
-  },[])
+  useEffect(() => {
+    home()
+  }, [])
 
   return (
     <Layout title='Home || Money Management App'>
@@ -31,4 +31,4 @@ function Home(props) {
 }
 
 
-export default connect(null, {home})(Home)
+export default connect(null, { home })(Home)

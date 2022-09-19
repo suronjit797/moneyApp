@@ -1,7 +1,7 @@
 const Types = {
     SET_USER: 'SET_USER',
     ERROR: 'ERROR',
-    HOME_ERROR: 'HOME_ERROR',
+    SET_TRANSITION: 'SET_TRANSITION',
 }
 
 export default Types

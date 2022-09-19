@@ -15,7 +15,9 @@ function MyApp({ Component, pageProps }) {
   if (typeof window !== 'undefined') {
     token = localStorage.getItem('token')
   }
-  setAuthToken(token)
+  if(token){
+    setAuthToken(token)
+  }
 
 
   return (

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -5,10 +6,18 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { connect } from 'react-redux'
 import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
+import { MdAddCircleOutline } from 'react-icons/md';
 import { useRouter } from 'next/router';
+import Link from 'next/Link';
+import { Button } from 'react-bootstrap';
+import TransitionModal from './TransitionModal'
 
 
 function NavComponents({ user }) {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const router = useRouter()
     const logout = () => {
@@ -20,25 +29,42 @@ function NavComponents({ user }) {
 
     console.log(user)
     return (
-        <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand href="#home"> <h4> Money App </h4> </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title={<BiUserCircle />} id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1"> {user.name} </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2"> {user.email} </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item className='text-danger fw-bold' onClick={logout}>
-                                <AiOutlineLogout />  Logout </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <>
+            <div className="bg-success">
+                <div className="container py-2 d-flex">
+                    <div>Welcome <b>{user.name}</b></div>
+                    <div className='ms-auto'> {user.email} </div>
+                </div>
+            </div>
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand> <h4 className='fw-bold'> <Link href='/'><span className="text-dark">Money App</span></Link> </h4> </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="ms-auto align-items-center">
+                            <Nav.Link>
+                                <Button
+                                    onClick={handleShow}
+                                    style={{ borderRadius: '30px' }}>
+                                    <MdAddCircleOutline />  New Transition
+                                </Button>
+                            </Nav.Link>
+                            <Nav.Link className='rounded-pill px-4' style={{background: '#5555553b',}}> <b> Balance: </b> {user.balance} </Nav.Link>
+                            <NavDropdown title={<BiUserCircle />} id="basic-nav-dropdown">
+                                <NavDropdown.Item>  {user.name} </NavDropdown.Item>
+                                <NavDropdown.Item>  {user.email} </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item>  <Link href='/transitions'><span className="text-dark">My Transitions</span></Link>  </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item className='text-danger fw-bold' onClick={logout}>
+                                    <AiOutlineLogout />  Logout </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <TransitionModal show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow} />
+        </>
     );
 }
 

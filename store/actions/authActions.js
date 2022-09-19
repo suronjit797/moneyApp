@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from '../../utilities/setAuthToken';
 
 export const register = user => async dispatch => {
-    console.log({ user, dispatch })
     try {
         const response = await axios.post('/users/register', user)
         const token = response.data.token
@@ -43,10 +42,9 @@ export const login = user => async dispatch => {
 
 export const home = () => async dispatch => {
     try {
-        // users/:id
         const token = localStorage.getItem('token')
         setAuthToken(token)
-        const decoded = jwt_decode(token.split(' ')[1])
+        const decoded = jwt_decode(token)
         dispatch({
             type: Types.SET_USER,
             payload: decoded
