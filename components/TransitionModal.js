@@ -1,37 +1,43 @@
 import React, { useState } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { getTransition } from '../store/actions/transitionActions'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { createTransition } from '../store/actions/transitionActions'
 import { connect } from 'react-redux'
+import Swal from 'sweetalert2'
 
-function TransitionModal({ show, handleClose, createTransition }) {
+function TransitionModal({ show, handleClose, createTransition, getTransition, user }) {
 
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState('')
     const [type, setType] = useState('')
     const [note, setNote] = useState('')
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        createTransition({
+        if (user.balance < amount && type ==='expense') {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Opps...',
+                text: "You haven't enough money to expense ",
+            })
+        }
+        await createTransition({
             amount: +amount,
             type,
             note
         })
-        setAmount(0)
+        setAmount('')
         setType('')
         setNote('')
+        getTransition()
         handleClose()
     }
 
 
 
-
     return (
         <>
-
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title> Create a new transition </Modal.Title>
@@ -44,27 +50,24 @@ function TransitionModal({ show, handleClose, createTransition }) {
                                 type="Number"
                                 placeholder="Place you amount"
                                 autoFocus
-                                controlId="amount"
                                 required
                                 onChange={e => setAmount(e.target.value)}
+                                value={amount}
                             />
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="type">
                             <Form.Label>Type</Form.Label>
                             <Form.Select
                                 aria-label="Default select example"
-                                controlId="amount"
                                 required
                                 onChange={e => setType(e.target.value)}
+                                value={type}
                             >
                                 <option disabled selected value=''>Select your transition type</option>
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>
                             </Form.Select>
                         </Form.Group>
-
-
                         <Form.Group className="mb-3" controlId="note">
                             <Form.Label>Note</Form.Label>
                             <Form.Control
@@ -72,6 +75,7 @@ function TransitionModal({ show, handleClose, createTransition }) {
                                 rows={3}
                                 required
                                 onChange={e => setNote(e.target.value)}
+                                value={note}
                                 placeholder='Make a note for this transition'
                             />
                         </Form.Group>
@@ -86,10 +90,14 @@ function TransitionModal({ show, handleClose, createTransition }) {
                         </Modal.Footer>
                     </Form>
                 </Modal.Body>
-
             </Modal>
         </>
     );
 }
 
-export default connect(null, { createTransition })(TransitionModal);
+const getStateToProps = state => ({
+    user: state.auth.user
+})
+
+
+export default connect(getStateToProps, { createTransition, getTransition })(TransitionModal);

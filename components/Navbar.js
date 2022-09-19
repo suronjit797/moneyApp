@@ -25,9 +25,6 @@ function NavComponents({ user }) {
         router.push('/login')
     }
 
-
-
-    console.log(user)
     return (
         <>
             <div className="bg-success">
@@ -49,7 +46,13 @@ function NavComponents({ user }) {
                                     <MdAddCircleOutline />  New Transition
                                 </Button>
                             </Nav.Link>
-                            <Nav.Link className='rounded-pill px-4' style={{background: '#5555553b',}}> <b> Balance: </b> {user.balance} </Nav.Link>
+                            <Nav.Link
+                                className={`rounded-pill px-4 ${user.balance < 100 ? 'bg-danger' : user.balance < 200 ? 'bg-warning' : ''}`}
+                                style={{ background: '#5555553b', }}
+                            >
+                                <b> Balance: </b>
+                                <span> {user.balance} </span>
+                            </Nav.Link>
                             <NavDropdown title={<BiUserCircle />} id="basic-nav-dropdown">
                                 <NavDropdown.Item>  {user.name} </NavDropdown.Item>
                                 <NavDropdown.Item>  {user.email} </NavDropdown.Item>

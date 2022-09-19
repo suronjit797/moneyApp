@@ -5,17 +5,21 @@ const init = {
     error: {}
 }
 
-const authReducer = (state = init, action) => {
+const transitionsReducer = (state = init, action) => {
     switch (action.type) {
-        case Types.SET_USER:
+        case Types.SET_TRANSITION:
             return {
-                user: action.payload,
+                transition: action.payload,
                 error: {},
-                isAuthenticated: Object.keys(action.payload).length !== 0,
             }
+            case Types.TRANSITION_ERROR:
+                return {
+                    transition: [],
+                    error: action.payload,
+                }
         default:
             return state
     }
 }
 
-export default authReducer;
+export default transitionsReducer;

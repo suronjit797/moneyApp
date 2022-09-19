@@ -42,12 +42,10 @@ export const login = user => async dispatch => {
 
 export const home = () => async dispatch => {
     try {
-        const token = localStorage.getItem('token')
-        setAuthToken(token)
-        const decoded = jwt_decode(token)
+        const res = await axios.get('/users')
         dispatch({
             type: Types.SET_USER,
-            payload: decoded
+            payload: res.data.user
         })
 
     } catch (error) {

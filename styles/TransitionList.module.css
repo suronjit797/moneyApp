@@ -1,0 +1,11 @@
+.table td{
+    vertical-align: baseline;
+}
+
+.action{
+    font-size: 20px;
+}
+
+.action span{
+    cursor: pointer;
+}

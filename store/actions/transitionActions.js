@@ -3,17 +3,41 @@ import Types from '../types/Type'
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2'
 
+
+export const getTransition = () => async dispatch => {
+    try {
+        const res = await axios.get('/transition')
+        console.log(res.data.data)
+        dispatch({
+            type: Types.SET_TRANSITION,
+            payload: res.data.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: Types.TRANSITION_ERROR,
+            payload: {}
+        })
+    }
+}
+
+
 export const createTransition = transition => async dispatch => {
     try {
         const res = await axios.post('/transition', transition)
-        if (res.data.status) {
+        if (res.data) {
             Swal.fire({
                 icon: 'success',
                 title: 'Yeah...',
                 text: 'Transition create successfully',
             })
         }
-        return
+        dispatch({
+            type: Types.SET_USER,
+            payload: res.data.user
+        })
+
+        return res.data.user
     } catch (error) {
         if (error) {
             Swal.fire({
@@ -22,23 +46,5 @@ export const createTransition = transition => async dispatch => {
                 text: 'Transition create failed',
             })
         }
-    }
-}
-
-export const transitions = () => async dispatch => {
-    try {
-        const token = localStorage.getItem('token')
-        setAuthToken(token)
-        const decoded = jwt_decode(token.split(' ')[1])
-        dispatch({
-            type: Types.SET_USER,
-            payload: decoded
-        })
-
-    } catch (error) {
-        dispatch({
-            type: Types.ERROR,
-            payload: {}
-        })
     }
 }
