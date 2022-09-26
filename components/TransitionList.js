@@ -7,20 +7,24 @@ import { BiEditAlt } from 'react-icons/bi';
 import style from '../styles/TransitionList.module.css'
 
 
-
-const TransitionList = ({ getTransition, transitions }) => {
+const TransitionList = ({filter, getTransition, transitions }) => {
     const { transition } = transitions
 
-    console.log(transition)
     useEffect(() => {
-        getTransition()
-    }, [])
+        getTransition(filter)
+    }, [filter])
 
     const handleDelete = id => {
         console.log('delete', id)
     }
     const handleEdit = id => {
         console.log('update', id)
+    }
+
+    if(!transition.length){
+        return (
+            <p className="text-danger m-3"> No transition found </p>
+        )
     }
 
 
@@ -58,7 +62,8 @@ const TransitionList = ({ getTransition, transitions }) => {
 };
 
 const getStateToProps = (state) => ({
-    transitions: state.transition
+    transitions: state.transition,
+    filter: state.filter
 })
 
 export default connect(getStateToProps, { getTransition })(TransitionList);

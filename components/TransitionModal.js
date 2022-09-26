@@ -7,7 +7,7 @@ import { createTransition } from '../store/actions/transitionActions'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 
-function TransitionModal({ show, handleClose, createTransition, getTransition, user }) {
+function TransitionModal({ show, handleClose, createTransition, getTransition, user, filter }) {
 
     const [amount, setAmount] = useState('')
     const [type, setType] = useState('')
@@ -30,7 +30,7 @@ function TransitionModal({ show, handleClose, createTransition, getTransition, u
         setAmount('')
         setType('')
         setNote('')
-        getTransition()
+        getTransition(filter)
         handleClose()
     }
 
@@ -96,7 +96,8 @@ function TransitionModal({ show, handleClose, createTransition, getTransition, u
 }
 
 const getStateToProps = state => ({
-    user: state.auth.user
+    user: state.auth.user,
+    filter: state.filter
 })
 
 

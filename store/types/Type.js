@@ -3,6 +3,7 @@ const Types = {
     ERROR: 'ERROR',
     SET_TRANSITION: 'SET_TRANSITION',
     TRANSITION_ERROR: 'TRANSITION_ERROR',
+    SET_DATE: 'SET_DATE',
 }
 
 export default Types

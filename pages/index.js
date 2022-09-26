@@ -4,6 +4,7 @@ import { home } from '../store/actions/authActions'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import TransitionList from '../components/TransitionList'
+import RightNav from '../components/RightNav'
 
 function Home({ home }) {
 
@@ -14,7 +15,12 @@ function Home({ home }) {
 
   return (
     <Layout title='Home || Money Management App'>
-      <TransitionList />
+      <div className={styles.home}>
+        <RightNav />
+        <TransitionList />
+
+      </div>
+
 
 
     </Layout>

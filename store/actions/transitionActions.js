@@ -1,13 +1,11 @@
 import axios from 'axios'
 import Types from '../types/Type'
-import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2'
 
-
-export const getTransition = () => async dispatch => {
+export const getTransition = (filter) => async dispatch => {
+    const { month, year } = filter
     try {
-        const res = await axios.get('/transition')
-        console.log(res.data.data)
+        const res = await axios.get(`/transition?month=${month}&year=${year}`)
         dispatch({
             type: Types.SET_TRANSITION,
             payload: res.data.data

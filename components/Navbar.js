@@ -27,14 +27,14 @@ function NavComponents({ user }) {
 
     return (
         <>
-            <div className="bg-success">
-                <div className="container py-2 d-flex">
+            <div className="bg-primary text-white">
+                <div className="container-fluid py-2 d-flex">
                     <div>Welcome <b>{user.name}</b></div>
                     <div className='ms-auto'> {user.email} </div>
                 </div>
             </div>
-            <Navbar bg="light" expand="lg">
-                <Container>
+            <Navbar bg="light" style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}} expand="lg">
+                <Container fluid>
                     <Navbar.Brand> <h4 className='fw-bold'> <Link href='/'><span className="text-dark">Money App</span></Link> </h4> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -47,7 +47,7 @@ function NavComponents({ user }) {
                                 </Button>
                             </Nav.Link>
                             <Nav.Link
-                                className={`rounded-pill px-4 ${user.balance < 100 ? 'bg-danger' : user.balance < 200 ? 'bg-warning' : ''}`}
+                                className={`rounded-pill px-4 ${user.balance < 100 ? 'bg-danger text-white' : user.balance < 200 ? 'bg-warning' : ''}`}
                                 style={{ background: '#5555553b', }}
                             >
                                 <b> Balance: </b>
