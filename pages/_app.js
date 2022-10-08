@@ -6,7 +6,7 @@ import axios from 'axios'
 import setAuthToken from '../utilities/setAuthToken';
 
 
-axios.defaults.baseURL = 'http://localhost:5000/api/v1'
+axios.defaults.baseURL = 'https://money-management-app.onrender.com/api/v1'
 
 
 function MyApp({ Component, pageProps }) {

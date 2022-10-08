@@ -16,11 +16,6 @@ const Layout = ({ children, title, auth }) => {
         if (!isUser) {
             router.push('/login')
         }
-        // if (!auth.isAuthenticated) {
-        //     console.log('no auth')
-        //     localStorage.removeItem('token')
-        //     router.push('/login')
-        // }
     }, [isUser])
 
 
