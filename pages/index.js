@@ -1,11 +1,11 @@
 
-import Layout from '../components/Layout'
+import Layout from '../Components/Layout'
 import styles from '../styles/Home.module.css'
 import { home } from '../store/actions/authActions'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
-import TransitionList from '../components/TransitionList'
-import RightNav from '../components/RightNav'
+import TransitionList from '../Components/TransitionList'
+import RightNav from '../Components/RightNav'
 
 
 function Home({ home }) {
