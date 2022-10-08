@@ -12,6 +12,8 @@ const TransitionList = ({ filter, getTransition, transitions }) => {
         getTransition(filter)
     }, [filter])
 
+    console.log(filter)
+
 
     if (!transition.length) {
         return (

@@ -4,3 +4,10 @@
   overflow: auto;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+
+@media (max-width: 650px) {
+  .RightNav{
+    height: auto;
+  }
+  
+}

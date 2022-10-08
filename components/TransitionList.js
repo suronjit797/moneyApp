@@ -3,7 +3,6 @@ import { getTransition, deleteTransition } from '../store/actions/transitionActi
 import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
-import { BiEditAlt } from 'react-icons/bi';
 import style from '../styles/TransitionList.module.css'
 
 
@@ -22,9 +21,26 @@ const TransitionList = ({ filter, getTransition, transitions, deleteTransition }
         setLoading(true)
     }
 
+    console.log(filter)
+
+    const monthNames = {
+        '01': 'January',
+        '02': 'February',
+        '03': 'March',
+        '04': 'April',
+        '05': 'May',
+        '06': 'June',
+        '07': 'July',
+        '08': 'August',
+        '09': 'September',
+        '10': 'October',
+        '11': 'November',
+        '12': 'December',
+    }
+
     if (!transition.length) {
         return (
-            <p className="text-danger m-3"> No transition found </p>
+            <p className="text-danger text-center my-5"> <b> No transition found in {monthNames[filter.month]}. Create a New transition </b> </p>
         )
     }
 
@@ -48,9 +64,9 @@ const TransitionList = ({ filter, getTransition, transitions, deleteTransition }
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>{trans.amount}</td>
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>{trans.type}</td>
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>
-                                    {trans.note.length < 50 ? trans.note : `${trans.note.slice(0, 50)}...` }
+                                    {trans.note.length < 50 ? trans.note : `${trans.note.slice(0, 50)}...`}
                                 </td>
-                                <td className={style.action}>                                  
+                                <td className={style.action}>
                                     <span onClick={() => handleDelete(trans._id)} className='mx-2 text-danger'> <RiDeleteBin7Fill /> </span>
                                 </td>
                             </tr>
