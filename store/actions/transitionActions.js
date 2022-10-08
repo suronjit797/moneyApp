@@ -46,3 +46,30 @@ export const createTransition = transition => async dispatch => {
         }
     }
 }
+
+// remove 
+export const deleteTransition = id => async dispatch => {
+
+    try {
+        const res = await axios.delete(`/transition/${id}`)
+        if (res.data) {
+            Swal.fire({
+                icon: 'success',
+                text: 'Transition Delete Successfully',
+            })
+        }
+        dispatch({
+            type: Types.SET_USER,
+            payload: res.data.user
+        })
+
+    } catch (error) {
+        if (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Opps...',
+                text: 'Transition create failed',
+            })
+        }
+    }
+}

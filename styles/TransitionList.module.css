@@ -4,6 +4,7 @@
 
 .action{
     font-size: 20px;
+    min-width: 100px;
 }
 
 .action span{

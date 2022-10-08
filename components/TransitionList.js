@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { getTransition } from '../store/actions/transitionActions'
+import React, { useEffect, useState } from 'react';
+import { getTransition, deleteTransition } from '../store/actions/transitionActions'
 import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
@@ -7,30 +7,33 @@ import { BiEditAlt } from 'react-icons/bi';
 import style from '../styles/TransitionList.module.css'
 
 
-const TransitionList = ({filter, getTransition, transitions }) => {
+const TransitionList = ({ filter, getTransition, transitions, deleteTransition }) => {
     const { transition } = transitions
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         getTransition(filter)
-    }, [filter])
+        setLoading(false)
+    }, [filter, loading])
 
     const handleDelete = id => {
-        console.log('delete', id)
+        deleteTransition(id)
+        getTransition(filter)
+        setLoading(true)
     }
     const handleEdit = id => {
         console.log('update', id)
     }
 
-    if(!transition.length){
+    if (!transition.length) {
         return (
             <p className="text-danger m-3"> No transition found </p>
         )
     }
 
-
     return (
-        <div style={{ maxWidth: '500px' }} className='mx-auto my-4'>
-            <Table striped hover responsive={true} variant='info' className={`text-center ${style.table}`}>
+        <div style={{ width: '100%' }} className='px-3 my-4'>
+            <Table striped hover responsive={true} className={`text-center ${style.table}`}>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -47,7 +50,9 @@ const TransitionList = ({filter, getTransition, transitions }) => {
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}> {ind + 1} </td>
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>{trans.amount}</td>
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>{trans.type}</td>
-                                <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}> {trans.note} </td>
+                                <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>
+                                    {trans.note.length < 50 ? trans.note : `${trans.note.slice(0, 50)}...` }
+                                </td>
                                 <td className={style.action}>
                                     <span onClick={() => handleEdit(trans._id)} className='mx-2 text-primary'> <BiEditAlt /> </span>
                                     <span onClick={() => handleDelete(trans._id)} className='mx-2 text-danger'> <RiDeleteBin7Fill /> </span>
@@ -66,4 +71,4 @@ const getStateToProps = (state) => ({
     filter: state.filter
 })
 
-export default connect(getStateToProps, { getTransition })(TransitionList);
+export default connect(getStateToProps, { getTransition, deleteTransition })(TransitionList);

@@ -23,7 +23,6 @@ const Layout = ({ children, title, auth }) => {
         // }
     }, [isUser])
 
-    console.log(auth)
 
 
 
