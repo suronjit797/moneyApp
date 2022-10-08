@@ -8,7 +8,7 @@ import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { useRouter } from 'next/router';
-import Link from 'next/Link';
+import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import TransitionModal from './TransitionModal'
 
