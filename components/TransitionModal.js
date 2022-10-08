@@ -12,9 +12,13 @@ function TransitionModal({ show, handleClose, createTransition, getTransition, u
     const [amount, setAmount] = useState('')
     const [type, setType] = useState('')
     const [note, setNote] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setLoading(true)
         if (user.balance < amount && type ==='expense') {
             return Swal.fire({
                 icon: 'error',
@@ -32,6 +36,7 @@ function TransitionModal({ show, handleClose, createTransition, getTransition, u
         setNote('')
         getTransition(filter)
         handleClose()
+        setLoading(false)
     }
 
 
@@ -84,7 +89,7 @@ function TransitionModal({ show, handleClose, createTransition, getTransition, u
                             <Button type='reset' variant="danger" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button type='submit' variant="success" >
+                            <Button type='submit' variant="success" disabled={loading} >
                                 Create a transition
                             </Button>
                         </Modal.Footer>

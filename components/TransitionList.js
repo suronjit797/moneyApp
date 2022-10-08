@@ -21,8 +21,6 @@ const TransitionList = ({ filter, getTransition, transitions, deleteTransition }
         setLoading(true)
     }
 
-    console.log(filter)
-
     const monthNames = {
         '01': 'January',
         '02': 'February',

@@ -35,6 +35,8 @@ const RightNav = ({ user, changeDate }) => {
         changeDate({ month, year })
     }
 
+    console.log(user)
+
 
     return (
         <div className={styles.RightNav}>
