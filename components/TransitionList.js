@@ -21,9 +21,6 @@ const TransitionList = ({ filter, getTransition, transitions, deleteTransition }
         getTransition(filter)
         setLoading(true)
     }
-    const handleEdit = id => {
-        console.log('update', id)
-    }
 
     if (!transition.length) {
         return (
@@ -53,8 +50,7 @@ const TransitionList = ({ filter, getTransition, transitions, deleteTransition }
                                 <td className={trans.type === 'expense' ? 'text-danger' : 'text-success'}>
                                     {trans.note.length < 50 ? trans.note : `${trans.note.slice(0, 50)}...` }
                                 </td>
-                                <td className={style.action}>
-                                    <span onClick={() => handleEdit(trans._id)} className='mx-2 text-primary'> <BiEditAlt /> </span>
+                                <td className={style.action}>                                  
                                     <span onClick={() => handleDelete(trans._id)} className='mx-2 text-danger'> <RiDeleteBin7Fill /> </span>
                                 </td>
                             </tr>
